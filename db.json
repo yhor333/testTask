@@ -1,0 +1,33 @@
+{
+  "posts": [
+    {
+      "imgUrl": "https://content1.rozetka.com.ua/goods/images/big_tile/13456118.jpg",
+      "name": "Kettle",
+      "count": 1,
+      "width": 1,
+      "heigth": 1,
+      "weigth": "300",
+      "id": 1
+    },
+    {
+      "imgUrl": "https://content2.rozetka.com.ua/goods/images/big_tile/275414216.jpg",
+      "name": "Washing conditioner gel",
+      "count": "4",
+      "width": "350",
+      "heigth": "150",
+      "weigth": "4000",
+      "id": 2
+    },
+    {
+      "count": 1,
+      "width": 1,
+      "heigth": 1,
+      "weigth": 1,
+      "id": 3
+    }
+  ],
+  "comments": [],
+  "profile": {
+    "name": "typicode"
+  }
+}
