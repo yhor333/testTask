@@ -1,0 +1,28 @@
+.product {
+  display: flex;
+  margin: 30px;
+}
+
+.product__img-wrapper {
+  width: 150px;
+  height: 150px;
+}
+
+.product__img-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.product__description-wrapper {
+  margin-left: 10%;
+}
+
+h6,
+h3 {
+  margin: 10px;
+}
+
+h6 {
+  text-align: left;
+}

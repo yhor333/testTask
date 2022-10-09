@@ -19,11 +19,22 @@
       "id": 2
     },
     {
+      "imgUrl": "http://smartmobilestudio.com/wp-content/uploads/2012/06/leather-book-preview.png",
+      "name": "Book",
       "count": 1,
-      "width": 1,
-      "heigth": 1,
-      "weigth": 1,
+      "width": "150",
+      "heigth": "200",
+      "weigth": "250",
       "id": 3
+    },
+    {
+      "imgUrl": "https://www.ikea.com/om/en/images/products/stefan-chair-brown-black__0727320_pe735593_s5.jpg?f=s",
+      "name": "Chair",
+      "count": 1,
+      "width": "400",
+      "heigth": "500",
+      "weigth": "1000",
+      "id": 4
     }
   ],
   "comments": [],

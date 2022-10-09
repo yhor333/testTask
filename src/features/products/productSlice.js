@@ -1,25 +1,21 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    isLoading: false,
-    products: []
-}
+  products: [],
+};
 
 const productsListSlice = createSlice({
-    name: 'productsList',
-    initialState,
-    reducers: {
-        toggleIsLoading: (state) => {
-            state.isLoading = !state.isLoading;
-        },
-        addProduts: (arr,state) => {
-            state.products = arr;
-        }
+  name: "productsList",
+  initialState,
+  reducers: {
+    addProduts: (state, actions) => {
+      state.products = actions.payload;
     },
-  });
+  },
+});
 
-  console.log(productsListSlice)
+export const productList = (state) => state.productList.products;
 
-  export const { addProduts } = productsListSlice.actions;
-  export const { toggleIsLoading } = productsListSlice.actions;
-  export default productsListSlice.reducer;
+export const { addProduts } = productsListSlice.actions;
+
+export default productsListSlice.reducer;

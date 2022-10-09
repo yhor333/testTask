@@ -1,8 +1,8 @@
 import { useState } from "react";
 import "./FormAddProduct.css";
-import RenderInputs from "./RenderInputs";
+import RenderInputs from "../RenderInputs/RenderInputs";
 
-const FormAddProduct = ({ closeModal }) => {
+const FormAddProduct = ({ closeModal, getProducts }) => {
   const [formControls, setformControls] = useState({
     imgUrl: {
       value: "",
@@ -56,19 +56,18 @@ const FormAddProduct = ({ closeModal }) => {
 
   let [isFormValid, setFormValid] = useState(false);
 
-  const isValidUrl = urlString=> {
-    try { 
-      return Boolean(new URL(urlString)); 
+  const isValidUrl = (urlString) => {
+    try {
+      return Boolean(new URL(urlString));
+    } catch (e) {
+      return false;
     }
-    catch(e){ 
-      return false; 
-    }
-}
+  };
 
   const vlidateControl = (value, controlName) => {
     let isValid = false;
 
-    if (typeof value === 'number') {
+    if (typeof value === "number") {
       value = Number(value);
     }
 
@@ -76,8 +75,7 @@ const FormAddProduct = ({ closeModal }) => {
       isValid = true;
     }
 
-    if (controlName === 'imgUrl') {
-      console.log('zash')
+    if (controlName === "imgUrl") {
       isValid = isValidUrl(value);
     }
 
@@ -114,7 +112,6 @@ const FormAddProduct = ({ closeModal }) => {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    writeNewData()
   };
 
   function writeNewData() {
@@ -123,24 +120,28 @@ const FormAddProduct = ({ closeModal }) => {
       if (key[1].value) {
         res[key[0]] = key[1].value;
       }
-      })
-      const requestOptions = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(res)
+    });
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(res),
+    };
+    fetch("http://localhost:3000/posts/", requestOptions).then((response) => {
+      if (response.status === 201) {
+        getProducts();
+        closeModal();
+      } else {
+        throw new Error(response.status);
       }
-    fetch('http://localhost:3001/posts/', requestOptions)
-    
-  };
+    });
+  }
 
-//   fetch('http://localhost:3001/posts/2', {
-//     method: "DELETE",
-//     headers: {
-//         'Content-type': 'application/json'
-//     }
-// })
-
-
+  // fetch("http://localhost:3000/posts/7", {
+  //   method: "DELETE",
+  //   headers: {
+  //     "Content-type": "application/json",
+  //   },
+  // });
 
   return (
     <form onSubmit={(event) => submitHandler(event)}>
@@ -149,17 +150,15 @@ const FormAddProduct = ({ closeModal }) => {
         onChangeHandler={onChangeHandler}
       />
 
-      <button
-        onClick={() => {
-          closeModal();
-        }}
-      >
-        Cancel
-      </button>
-      <input type={"submit"} value={"Apply"} disabled={!isFormValid} onClick={closeModal}/>
+      <button onClick={closeModal}>Cancel</button>
+      <input
+        type={"submit"}
+        value={"Apply"}
+        disabled={!isFormValid}
+        onClick={writeNewData}
+      />
     </form>
   );
 };
 
 export default FormAddProduct;
-

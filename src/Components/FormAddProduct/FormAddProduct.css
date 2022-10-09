@@ -1,13 +1,13 @@
 form {
-    display: flex;
-    flex-direction: column;
-    object-fit: contain;
+  display: flex;
+  flex-direction: column;
+  object-fit: contain;
 }
 
 form label > input {
-    margin-right: 100vw
+  margin-right: 100vw;
 }
 
 button {
-    margin: 10px 0;
+  margin: 10px 0;
 }

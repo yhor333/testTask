@@ -1,42 +1,29 @@
-import { useDispatch } from 'react-redux';
-import './ProductList.css';
-import { toggleIsLoading, addProduts } from '../../features/products/productSlice';
+import "./ProductList.css";
+import { productList } from "../../Features/Products/productSlice";
+import { useSelector } from "react-redux";
+import Product from "./Product/Product";
+import { useEffect, useState } from "react";
 
 const ProductList = () => {
-    const dispatch = useDispatch();
-
-     function getProducts() {
-        let url = 'http://localhost:3001/posts/';
-        const res = []
-        try {
-            fetch(url)
-                .then(resolve => {
-                    return resolve.json();
-                })
-                .then(parseData => {
-                    
-                    console.log(parseData);
-                    
-                    dispatch(toggleIsLoading());
-                    // dispatch(addProduts(res));
-
-            })
-
-                return
-        } catch (error) {
-            console.log(error);
-        }
-    }
-    getProducts()
-    
-
-    
-    
-    return (
-        <div>
-            asd
-        </div>
-    )
-}
+  const products = useSelector(productList);
+  console.log(products);
+  return (
+    <ul>
+      {products.map((product) => {
+        return (
+          <Product
+            imgUrl={product.imgUrl}
+            count={product.count}
+            name={product.name}
+            weigth={product.weigth}
+            width={product.width}
+            heigth={product.heigth}
+            key={product.name}
+          />
+        );
+      })}
+    </ul>
+  );
+};
 
 export default ProductList;

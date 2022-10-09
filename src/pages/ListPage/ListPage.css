@@ -1,11 +1,12 @@
 .main {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding-top: 30px;
 }
 
 .main > div {
-    text-align: center;
-    width: 75vw;
-    margin: 0 auto;
+  text-align: center;
+  width: 75vw;
+  margin: 0 auto;
 }
