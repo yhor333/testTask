@@ -136,13 +136,6 @@ const FormAddProduct = ({ closeModal, getProducts }) => {
     });
   }
 
-  // fetch("http://localhost:3000/posts/7", {
-  //   method: "DELETE",
-  //   headers: {
-  //     "Content-type": "application/json",
-  //   },
-  // });
-
   return (
     <form onSubmit={(event) => submitHandler(event)}>
       <RenderInputs

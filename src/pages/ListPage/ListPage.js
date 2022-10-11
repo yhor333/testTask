@@ -3,7 +3,6 @@ import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
 import FormAddProduct from "../../Components/FormAddProduct/FormAddProduct";
 import ProductList from "../../Components/ProductList/ProductList";
-import { useSelector } from "react-redux";
 import "./ListPage.css";
 import { useDispatch } from "react-redux";
 import { addProduts } from "../../Features/Products/productSlice";
@@ -12,7 +11,6 @@ import { useEffect } from "react";
 let isResposeExist = false;
 
 const ListPage = () => {
-  const { products } = useSelector((state) => state.productList);
   const dispatch = useDispatch();
 
   function getProducts() {
@@ -39,7 +37,7 @@ const ListPage = () => {
     <main className="main">
       <div>
         <h2>Your List</h2>
-        <ProductList />
+        <ProductList getProducts={getProducts} />
         <hr />
         <Popup
           modal

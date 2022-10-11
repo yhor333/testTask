@@ -6,7 +6,10 @@
 }
 
 .main > div {
-  text-align: center;
   width: 75vw;
   margin: 0 auto;
+}
+
+h2 {
+  text-align: center;
 }
