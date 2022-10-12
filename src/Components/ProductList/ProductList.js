@@ -26,7 +26,6 @@ const ProductList = ({ getProducts }) => {
       )
       .sort((a, b) => b.count - a.count);
     setListProducts(sortedProducts);
-    const htmlProducts = document.querySelectorAll(".product");
     const dropdown = document.querySelector(".dropdown");
     const select = dropdown.querySelector(".select");
     const caret = document.querySelector(".caret");
@@ -43,12 +42,6 @@ const ProductList = ({ getProducts }) => {
         selected.innerHTML = option.innerText;
         caret.classList.remove("caret-rotate");
         menu.classList.remove("menu-open");
-      });
-    });
-
-    htmlProducts.forEach((product) => {
-      product.addEventListener("click", (event) => {
-        console.log(products);
       });
     });
   }, [products]);

@@ -2,55 +2,69 @@ import { useState } from "react";
 import "./FormAddProduct.css";
 import RenderInputs from "../RenderInputs/RenderInputs";
 
-const FormAddProduct = ({ closeModal, getProducts }) => {
+const FormAddProduct = ({
+  closeModal,
+  getProducts,
+  id,
+  heigth,
+  width,
+  count,
+  weigth,
+  name,
+  imgUrl,
+}) => {
+  let touched;
+  if (id) {
+    touched = true;
+  }
   const [formControls, setformControls] = useState({
     imgUrl: {
-      value: "",
+      value: imgUrl || "",
       type: "text",
       lable: "Img url",
       errorMessage: "Please, enter correct url",
-      valid: false,
-      touched: false,
+      valid: true,
+      touched: touched || false,
     },
     name: {
-      value: "",
+      value: name || "",
       type: "text",
       lable: "Name",
       errorMessage: "This input can't be empty",
       valid: true,
-      touched: false,
+      touched: touched || false,
     },
     count: {
-      value: 1,
+      value: count || 1,
       type: "number",
       lable: "Count",
       errorMessage: "Value can't be less then 0 or empty",
       valid: true,
-      touched: false,
+      touched: touched || false,
     },
     width: {
-      value: 1,
+      value: width || 1,
       type: "number",
       lable: "Width",
       errorMessage: "Value can't be less then 0 or empty",
       valid: true,
-      touched: false,
+      touched: touched || false,
     },
     heigth: {
-      value: 1,
+      value: heigth || 1,
       type: "number",
       lable: "Heigth",
       errorMessage: "Value can't be less then 0 or empty",
       valid: true,
-      touched: false,
+      touched: touched || false,
     },
     weigth: {
-      value: 1,
+      value: weigth || 1,
       type: "number",
       lable: "Weigth (g)",
       errorMessage: "Value can't be less then 0 or empty",
       valid: true,
-      touched: false,
+      touched: touched || false,
     },
   });
 
@@ -120,6 +134,7 @@ const FormAddProduct = ({ closeModal, getProducts }) => {
       if (key[1].value) {
         res[key[0]] = key[1].value;
       }
+      return res;
     });
     const requestOptions = {
       method: "POST",
@@ -136,6 +151,31 @@ const FormAddProduct = ({ closeModal, getProducts }) => {
     });
   }
 
+  function patchData(id) {
+    console.log(id);
+    const res = {};
+    Object.entries(formControls).forEach((key) => {
+      if (key[1].value) {
+        res[key[0]] = key[1].value;
+      }
+    });
+    console.log(id);
+    fetch(`http://localhost:3000/posts/${id}`, {
+      method: "PATCH",
+      body: JSON.stringify(res),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    }).then((response) => {
+      if (response.status === 200) {
+        getProducts();
+        closeModal();
+      } else {
+        throw new Error(response.status);
+      }
+    });
+  }
+
   return (
     <form onSubmit={(event) => submitHandler(event)}>
       <RenderInputs
@@ -144,12 +184,21 @@ const FormAddProduct = ({ closeModal, getProducts }) => {
       />
 
       <button onClick={closeModal}>Cancel</button>
-      <input
-        type={"submit"}
-        value={"Apply"}
-        disabled={!isFormValid}
-        onClick={writeNewData}
-      />
+      {id ? (
+        <input
+          type={"submit"}
+          value={"Edit"}
+          disabled={!isFormValid}
+          onClick={() => patchData(id)}
+        />
+      ) : (
+        <input
+          type={"submit"}
+          value={"Apply"}
+          disabled={!isFormValid}
+          onClick={writeNewData}
+        />
+      )}
     </form>
   );
 };

@@ -1,5 +1,6 @@
 import Popup from "reactjs-popup";
 import "./Product.css";
+import Editor from "../../Editor/Editor";
 
 const Product = ({
   name,
@@ -24,7 +25,7 @@ const Product = ({
     });
   }
   return (
-    <li className="product" id={id}>
+    <li className="product">
       <div className="product__img-wrapper">
         <img src={imgUrl} alt={name}></img>
       </div>
@@ -42,12 +43,9 @@ const Product = ({
             </div>
           )}
         </Popup>
-        <Popup trigger={<button>Edit</button>}>
+        <Popup trigger={<button id={id}>Edit</button>}>
           {(close) => (
-            <div>
-              <button onClick={() => deleteProduct(id)}>Apply</button>
-              <button onClick={() => close()}>Cancel</button>
-            </div>
+            <Editor id={id} getProducts={getProducts} closeModal={close} />
           )}
         </Popup>
       </div>
